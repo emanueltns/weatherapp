@@ -2,11 +2,12 @@ package com.devforfun.weatherforcast.weather
 
 import com.devforfun.weatherforcast.di.NetworkModule
 import com.devforfun.weatherforcast.di.WeatherApplicationScope
+import com.devforfun.weatherforcast.weather.viewmodel.WeatherViewModel
 import dagger.Component
 
-@Component(dependencies = [NetworkModule::class])
+@Component(modules = [WeatherActivityModule::class], dependencies = [NetworkModule::class])
 @WeatherApplicationScope
-interface WeatherActivityComponent{
+interface WeatherActivityComponent {
 
-
+    fun injectWeatherViewModel(weatherViewModel: WeatherViewModel)
 }
