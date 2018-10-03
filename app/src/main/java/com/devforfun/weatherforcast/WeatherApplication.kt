@@ -13,7 +13,6 @@ class WeatherApplication : Application() {
         lateinit var weatherComponent : WeatherComponent
     }
 
-
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
