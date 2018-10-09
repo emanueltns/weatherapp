@@ -1,5 +1,6 @@
 package com.devforfun.weatherforcast.weather
 
+import com.devforfun.weatherforcast.BuildConfig
 import com.devforfun.weatherforcast.WeatherApplication
 import com.devforfun.weatherforcast.api.WeatherApi
 import com.devforfun.weatherforcast.api.model.WeatherResponse
@@ -13,7 +14,7 @@ class WeatherRepository{
     fun getWeather(lat : String, lon : String) : Observable<WeatherResponse> {
         return Observable.create {
             subscriber ->
-            val callResponse  = weatherApi.getWeatherOnLocation(lat, lon)
+            val callResponse  = weatherApi.getWeatherOnLocation(lat, lon, BuildConfig.API_KEY)
             val response = callResponse.execute()
 
             if(response.isSuccessful) {

@@ -36,10 +36,6 @@ class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding  = DataBindingUtil.setContentView(this, R.layout.activity_weather)
-        binding.setCondition(ContentItem(getString(R.string.current_condition),"WeatherValue"))
-        binding.setTemperature(ContentItem(getString(R.string.temperature), "TempValue"))
-        binding.setWindSpeed(ContentItem(getString(R.string.wind_speed), "SpeedValue"))
-        binding.setWindDirection (ContentItem(getString(R.string.wind_direction), "WindDirection"))
         setSupportActionBar(toolbar)
 
         viewModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
@@ -48,6 +44,7 @@ class WeatherActivity : AppCompatActivity() {
         subscriptions.add(viewModel.getWeatherDisposable());
 
         fab.setOnClickListener { view ->
+            binding.progress.visibility = View.VISIBLE
             subscriptions.add(viewModel.getWeatherDisposable());
         }
     }
@@ -55,21 +52,23 @@ class WeatherActivity : AppCompatActivity() {
     private fun subscribeToDataStream() {
         viewModel.weatherSuccess.observe(this, Observer { it ->
             it?.let {
-                binding.progress.visibility = View.GONE;
+                binding.empty.visibility = View.GONE
                 binding.setCondition(ContentItem(getString(R.string.current_condition),it.weather[0].main))
                 binding.setTemperature(ContentItem(getString(R.string.temperature), it.main.temp.toString()))
                 binding.setWindSpeed(ContentItem(getString(R.string.wind_speed), it.wind.speed.toString()))
                 binding.setWindDirection (ContentItem(getString(R.string.wind_direction), it.wind.deg.toString()))
+                val str = "${BuildConfig.IMAGE_URL}${it.weather[0].icon}.png"
                 Picasso.get().load("${BuildConfig.IMAGE_URL}${it.weather[0].icon}.png")
-                        .centerCrop()
                         .into(binding.weatherIcon)
+                binding.progress.visibility = View.GONE
             }
         } )
 
         viewModel.weatherError.observe(this, Observer { it ->
             it?.let {
                 Toast.makeText(this,it, Toast.LENGTH_LONG).show()
-                binding.progress.visibility = View.GONE;
+                binding.progress.visibility = View.GONE
+                binding.empty.visibility = View.VISIBLE
             }
         })
     }

@@ -12,7 +12,7 @@ data class WeatherResponse(val coord : Coordinates,
                       val name : String,
                       val cod : Int)
 
-data class Coordinates(val lon : Int, val lat : Int)
+data class Coordinates(val lon : Double, val Double : Int)
 
 data class Weather(val id : Int,
               val main : String,

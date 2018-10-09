@@ -20,7 +20,8 @@ android {
     buildTypes {
         release {
             buildConfigField "String", "SERVER_URL", "\"http://api.openweathermap.org/data/2.5/\""
-            buildConfigField "String", "IMAGE_URL", "\" http://openweathermap.org/img/w/\""
+            buildConfigField "String", "IMAGE_URL", "\"http://openweathermap.org/img/w/\""
+            buildConfigField "String", "API_KEY", "\"09581d6211e9ff6467c36a6a1be66d7b\""
             buildConfigField "String", "APP_VERSION", "\"0.1\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -28,7 +29,8 @@ android {
 
         debug {
             buildConfigField "String", "SERVER_URL", "\"http://api.openweathermap.org/data/2.5/\""
-            buildConfigField "String", "IMAGE_URL", "\" http://openweathermap.org/img/w/\""
+            buildConfigField "String", "IMAGE_URL", "\"http://openweathermap.org/img/w/\""
+            buildConfigField "String", "API_KEY", "\"09581d6211e9ff6467c36a6a1be66d7b\""
             buildConfigField "String", "APP_VERSION", "\"0.1\""
         }
     }

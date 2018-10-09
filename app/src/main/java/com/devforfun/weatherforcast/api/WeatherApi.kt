@@ -10,6 +10,7 @@ interface WeatherApi {
 
     @GET("weather/")
     fun getWeatherOnLocation(@Query("lat") lat: String,
-                             @Query("lon") lon: String) : Call<WeatherResponse>
+                             @Query("lon") lon: String,
+                             @Query("appid") appId : String) : Call<WeatherResponse>
 
 }
