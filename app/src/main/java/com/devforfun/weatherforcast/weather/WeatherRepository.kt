@@ -8,7 +8,6 @@ import javax.inject.Inject
 
 class WeatherRepository{
 
-
     var weatherApi : WeatherApi = WeatherApplication.weatherComponent.weatherService
 
     fun getWeather(lat : String, lon : String) : Observable<WeatherResponse> {
